@@ -81,9 +81,43 @@ Input: Tokenized sentence (fixed max length)
 
 Output: Probability distribution over vocabulary
 
-## Future Improvements
 
-GPU inference
+## Model Training
+
+The language model was trained using a **Long Short-Term Memory (LSTM)** network implemented in **PyTorch**. 
+
+### Training Dataset
+
+The dataset is a human conversational dataset obtained from kaggle.
+Dataset: https://www.kaggle.com/datasets/projjal1/human-conversation-training-data
+
+### Training Workflow
+- Text data was preprocessed by:
+  - Lowercasing
+  - Tokenizing into words
+  - Building a vocabulary with `<PAD>` and `<UNK>` tokens
+- Input sequences were padded or truncated to a fixed maximum length.
+- The model was trained to predict the **next word** given a sequence of previous words.
+
+### Training Setup
+- Loss Function: **Cross Entropy Loss**
+- Optimizer: **Adam**
+- Batch size: 32
+- epochs: 50
+- Final training loss converged to  **0.550**, indicating effective learning of language patterns
+
+### Training Environment
+- Model training was performed in **Google Colab**
+- GPU acceleration was used to speed up training
+- Trained weights and vocabulary were exported and reused in the deployed web application
+
+The trained model is loaded in inference mode for the web application to provide real-time next word predictions.
+
+### Training Notebook
+
+The complete model training workflow is available in training/training.ipynb.
+
+## Future Improvements
 
 top-k sampling
 
@@ -94,6 +128,4 @@ Deployment (Vercel + Render)
 Mobile-friendly UI
 
 ## Author
-
-Built by Suprith
-For learning, experimentation, and showcasing ML + full-stack skills.
+Built by Suprith For learning, experimentation, and showcasing ML + full-stack skills.
